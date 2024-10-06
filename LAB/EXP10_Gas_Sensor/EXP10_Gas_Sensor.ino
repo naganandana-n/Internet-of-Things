@@ -2,7 +2,8 @@
 int gasSensorPin = A0; // AO pin of the Flying Fish sensor connected to A0 of NodeMCU
 
 void setup() {
-  Serial.begin(115200);  // Start the Serial communication
+  Serial.begin(9600);
+  delay(2000); 
 }
 
 void loop() {
