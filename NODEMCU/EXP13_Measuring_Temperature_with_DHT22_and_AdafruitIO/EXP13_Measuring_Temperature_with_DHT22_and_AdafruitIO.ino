@@ -4,12 +4,12 @@
 #include "DHT.h"
 DHT dht(D4,DHT22);
 
-#define ssid "Naganandana"
+#define ssid ""
 #define pass ""
 #define server "io.adafruit.com"
 #define port 1883
-#define user "naganandana"
-#define key "aio_ngJJ81Nfk1MriUbVo20TgjyJwpA4"
+#define user ""
+#define key ""
 WiFiClient client;
 Adafruit_MQTT_Client mqtt(&client,server,port,user,key);
 Adafruit_MQTT_Publish guage = Adafruit_MQTT_Publish(&mqtt,user"/feeds/temp");

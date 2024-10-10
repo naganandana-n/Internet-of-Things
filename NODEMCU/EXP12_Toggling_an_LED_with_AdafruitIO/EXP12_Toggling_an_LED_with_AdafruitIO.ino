@@ -2,13 +2,13 @@
 #include<Adafruit_MQTT.h> // HEADER FILES REQUIRED FOR ADAFRUIT MQTT
 #include<Adafruit_MQTT_Client.h>
 
-#define ssid "Naganandana"
+#define ssid ""
 #define pass ""
 #define server "io.adafruit.com" // CLOUD SERVER
 #define port 1883 // MQTT PORT NUMBER (FIXED)
  
-#define user "naganandana" // GET FROM ADAFRUIT WEBSITE
-#define key "aio_ngJJ81Nfk1MriUbVo20TgjyJwpA4"
+#define user "" // GET FROM ADAFRUIT WEBSITE
+#define key ""
 
 WiFiClient client;
 Adafruit_MQTT_Client mqtt(&client,server,port,user,key);
