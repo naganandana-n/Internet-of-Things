@@ -2,15 +2,10 @@
 
 This repository contains coursework, projects, and practice code related to the Internet of Things (IoT) as part of academic work at BITS, Pilani.
 
-## Table of Contents
-- [NodeMCU Projects](#nodemcu-projects)
-- [Raspberry Pi Projects](#raspberry-pi-projects)
-- [Practice and Other Code](#practice-and-other-code)
-
 ## NodeMCU Projects
 This folder contains code and instructions for projects utilizing the NodeMCU (ESP8266) board, showcasing various IoT implementations.
 
-- [**Basic NodeMCU Projects**](https://github.com/naganandana-n/Internet-of-Things/tree/main/NODEMCU)
+- [**NodeMCU Projects**](https://github.com/naganandana-n/Internet-of-Things/tree/main/NODEMCU)
 
 ## Raspberry Pi Projects
 Projects using Raspberry Pi for more advanced IoT applications and integrations.
