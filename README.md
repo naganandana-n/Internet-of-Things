@@ -8,6 +8,8 @@ This repository contains coursework, projects, and practice code related to the 
 This folder contains code and instructions for projects utilizing the NodeMCU (ESP8266) board, showcasing various IoT implementations.
 
 - [**NodeMCU Projects**](https://github.com/naganandana-n/Internet-of-Things/tree/main/NODEMCU)
+  - Toggling an LED with Arduino Cloud
+  - Measuring temperature with DHT22 and Arduino Cloud
 
 ## Raspberry Pi Projects
 Projects using Raspberry Pi for more advanced IoT applications and integrations.
