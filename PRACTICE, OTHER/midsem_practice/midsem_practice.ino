@@ -17,8 +17,8 @@
 #define pass ""
 #define server "io.adafruit.com" // cloud server (FIXED)
 #define port 1883 // port number (FIXED)
-#define user "naganandana" // get from adafruit website (KEY)
-#define key "aio_iWFJ61WRfgRQWbdJvo6Cl8xqrSkM" 
+#define user "" // get from adafruit website (KEY)
+#define key "" 
 
 // MQTT setup:
 WiFiClient client;
