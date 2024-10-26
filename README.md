@@ -2,7 +2,7 @@
 
 This repository contains coursework, projects, and practice code related to the Internet of Things (IoT) as part of academic work at BITS, Pilani.
 <!-- [**IOT MIDSEM NOTES**](https://docs.google.com/document/d/1RVzj1frhIY4QntJ_ok5rZr6QToq0IAFC_53QJiQqQ_0/edit?usp=sharing) -->
-<!-- [**IOT MIDSEM LAB PREP**](https://docs.google.com/document/d/1HCItJ4duF9iYRxVg3YonzxmjmHrtKkO7Yj_sFy3CNTI/edit?usp=sharing) -->
+[**IOT MIDSEM LAB PREP**](https://docs.google.com/document/d/1ZrOJz02MZ_o3LdPnzjQ86zoINnuuFDoUYRaBwk2VM9A/edit?usp=sharing)
 
 ## NodeMCU Projects
 This folder contains code and instructions for projects utilizing the NodeMCU (ESP8266) board, showcasing various IoT implementations.
