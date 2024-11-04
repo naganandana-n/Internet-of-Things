@@ -1,94 +1,72 @@
-// Function:
-// - WiFiClient client
-// - Adafruit_MQTT_Client mqtt(&client, server, port, user, key);
-// - Adafruit_MQTT_Subscribe toggle = Adafruit_MQTT_Subscribe(&mqtt, user "/feeds/newled");
-// - Serial.println(mqtt.connectErrorString(status));
-// - while(WiFi.status() != WL_CONNECTED)
-// - mqtt.subscribe(&toggle)
-// - just refer to the rest from the code, no use seeing here!
+#include<ESP8266WiFi.h>
+#include<Adafruit_MQTT.h> // HEADER FILES REQUIRED FOR ADAFRUIT MQTT
+#include<Adafruit_MQTT_Client.h>
 
-// header files:
-#include <ESP8266WiFi.h>
-#include <Adafruit_MQTT.h>
-#include <Adafruit_MQTT_Client.h>
-
-// defining network and MQTT server details:
 #define ssid "Naganandana"
 #define pass ""
-#define server "io.adafruit.com" // cloud server (FIXED)
-#define port 1883 // port number (FIXED)
-#define user "" // get from adafruit website (KEY)
-#define key "" 
+#define server "io.adafruit.com" // CLOUD SERVER
+#define port 1883 // MQTT PORT NUMBER (FIXED)
+ 
+#define user "naganandana" // GET FROM ADAFRUIT WEBSITE
+#define key "aio_cLcw86UGvtao5BzGrxbLxgIBQvoZ"
 
-// MQTT setup:
 WiFiClient client;
-Adafruit_MQTT_Client mqtt(&client, server, port, user, key);
-
-// MQTT TOPICS: (IMP - UNDERSTAND TOPICS)
-Adafruit_MQTT_Subscribe toggle = Adafruit_MQTT_Subscribe(&mqtt, user "/feeds/newled");
-
-// MQTT connection function:
+Adafruit_MQTT_Client mqtt(&client,server,port,user,key);
+Adafruit_MQTT_Subscribe toggle = Adafruit_MQTT_Subscribe(&mqtt,user"/feeds/lednodemcu"); // TWO TOPICS: 
+Adafruit_MQTT_Subscribe slider = Adafruit_MQTT_Subscribe(&mqtt,user"/feeds/ledslider"); // TOGGLE AND SLIDER
 void MQTT_Connect(){
-  if (mqtt.connected()){
-    return;
+     if(mqtt.connected()){
+          return;
+       }
+     Serial.println("Connecting to MQTT...");
+     int retries = 3,status; // WILL TRY TO CONNECT TO MQTT 3 TIMES.
+     while((status = mqtt.connect()) != 0){
+          Serial.println(mqtt.connectErrorString(status));
+          Serial.println("Retrying after 5 secs....");
+          delay(5000);
+          retries--;
+          if(retries == 0){
+              while(1);   // IMP: RESET THE NODEMCU
+            }
+      }
+      Serial.println("MQTT Connected");
   }
-  Serial.println("Connecting to MQTT...");
-  int retries = 3; // 3 chances to connect
-  int status;
-  while((status = mqtt.connect()) != 0){ // equal to zero -> connected
-    Serial.println(mqtt.connectErrorString(status));
-    delay(5000);
-    retries--;
-    if (retries == 0){
-      while(1); // STOPS THE CODE, IF ITS UNABLE TO CONNECT (IMP)
-    }
-  } 
-  Serial.println("MQTT Connected!");
-}
-
-void setup(){
-  delay(1000);
+void setup() {
   Serial.begin(9600);
-  delay(1000);
-  Serial.println("");
-  Serial.println("Toggling an LED with Adafruit IO!");
-
-  pinMode(D4, OUTPUT);
-  
-  // connecting to WiFi:
+  pinMode(D4,OUTPUT);
   Serial.println("Connecting to WiFi...");
-  WiFi.begin(ssid, pass);
-  while(WiFi.status() != WL_CONNECTED){
+  WiFi.begin(ssid,pass);
+  while(WiFi.status()!= WL_CONNECTED){ // CONNECTING TO WIFI
     Serial.print(".");
     delay(500);
-  }
-  Serial.println("WiFi connected!");
-
-  // SUBSCRIBE TO Toggle (IMP):
-  // NOTE: If you have mutliple toggles, you can do:
-  // mqtt.subscribe(&toggle1);
-  // mqtt.subscribe(&toggle2);
-  // mqtt.subscribe(&toggle3);
-  mqtt.subscribe(&toggle);
+    }
+  Serial.println("WiFi Connected !");
+  mqtt.subscribe(&toggle); // NODEMCU TRIES TO SUBSCRIBE TO TOGGLE AND SLIDER 
+  mqtt.subscribe(&slider);
 }
 
-void loop(){
+void loop() {
   MQTT_Connect();
-  Adafruit_MQTT_Subscribe *subscription; // its a pointer bcz, mqtt.readSubscription(5000) returns a pointer to it
-                                         // and thus pointer of pointer, gives a normal object.
-
+  Adafruit_MQTT_Subscribe *subscription; // CHECK OUT WHY THIS IS A POINTER
   while(subscription = mqtt.readSubscription(5000)){
-    if (subscription == &toggle){
-      char* data = (char*)toggle.lastread;
-      Serial.println(data);
-      if (strcmp(data, "ON") == 0){ // if data = "ON" -> return 0, if not same return 1
-        digitalWrite(D4, HIGH);
-        Serial.println("LED is ON!");
-      }
-      if (strcmp(data, "OFF") == 0){
-        digitalWrite(D4, LOW);
-        Serial.println("LED is OFF!");
-      }
+
+       if(subscription == &toggle){
+          char* data = (char*)toggle.lastread;
+          Serial.println(data);
+          if(strcmp(data,"ON")==0){
+              digitalWrite(D4,HIGH);
+              Serial.println("LED IS ON");
+            }
+           if(strcmp(data,"OFF")==0){
+              digitalWrite(D4,LOW);
+              Serial.println("LED IS OFF");
+            }
+        }
+
+        if(subscription == &slider){
+          int brightness = atoi((char*)slider.lastread); 
+          Serial.println(brightness);
+          analogWrite(D4,brightness);
+         }
     }
-  }
 }
