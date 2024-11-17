@@ -1,3 +1,7 @@
+<!--
+
+FIRST MAIN PAGE
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,6 +67,105 @@
             <a href="https://www.linkedin.com/in/naganandana/" target="_blank">LinkedIn</a>
             <a href="https://github.com/naganandana-n/Internet-of-Things" target="_blank" class="github">GitHub</a>
             <a href="http://3.29.135.164/phpmyadmin/" target="_blank">phpMyAd</a>
+        </div>
+    </div>
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naganandana</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1.2em;
+            color: #555;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Adds space between rows of buttons */
+            margin-top: 20px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px; /* Adds space between buttons in the same row */
+        }
+        .buttons a {
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 1em;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .buttons a.linkedin {
+            background-color: #0073b1;
+        }
+        .buttons a.github {
+            background-color: #333;
+        }
+        .buttons a.phpmyadmin {
+            background-color: #ff4500;
+        }
+        .buttons a.dht {
+            background-color: #4caf50; /* Green for DHT Data Table */
+        }
+        .buttons a.led {
+            background-color: #2196f3; /* Blue for LED Control */
+        }
+        .buttons a:hover {
+            transform: scale(1.05); /* Slight zoom effect on hover */
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Naganandana Nagendra</h1>
+        <p>Roll No: 2021A7PS0215U</p>
+
+        <!-- Button Container -->
+        <div class="button-container">
+            <!-- First Row of Buttons -->
+            <div class="buttons">
+                <a href="https://www.linkedin.com/in/naganandana/" target="_blank" class="linkedin">LinkedIn</a>
+                <a href="https://github.com/naganandana-n/Internet-of-Things" target="_blank" class="github">GitHub</a>
+                <a href="http://3.29.135.164/phpmyadmin/" target="_blank" class="phpmyadmin">phpMyAdmin</a>
+            </div>
+
+            <!-- Second Row of Buttons -->
+            <div class="buttons">
+                <a href="http://3.29.135.164/EXP10_php_program_to_print__MySQL_table.php" target="_blank" class="dht">DHT Data Table</a>
+                <a href="http://3.29.135.164/EXP17_AWS_server_controlled_LED.php" target="_blank" class="led">LED Control</a>
+            </div>
         </div>
     </div>
 </body>
