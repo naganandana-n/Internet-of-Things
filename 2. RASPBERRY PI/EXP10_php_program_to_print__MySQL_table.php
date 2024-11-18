@@ -34,6 +34,32 @@
             margin: 5px 0;
             color: #555;
         }
+        .controls {
+            margin: 20px 0;
+        }
+        .controls input[type="text"] {
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px;
+        }
+        .controls button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            font-size: 1em;
+            font-weight: bold;
+            color: #fff;
+            background-color: #0073b1;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .controls button:hover {
+            background-color: #005f8c;
+            transform: scale(1.05);
+        }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -61,6 +87,15 @@
         <h1>Naganandana - 2021A7PS0215U</h1>
         <h2>MySQL Database: iotdata</h2>
         <h2>MySQL Table: dhtdata</h2>
+
+        <!-- Date Controls -->
+        <div class="controls">
+            <label for="date">Enter Date (DD-MM-YYYY):</label>
+            <input type="text" id="date" name="date" placeholder="DD-MM-YYYY">
+            <button onclick="filterData()">Filter Data</button>
+            <button onclick="clearDate()">Clear Date</button>
+        </div>
+
         <table>
             <tr>
                 <th>ID</th>
@@ -77,20 +112,46 @@
             $user = "iot_user";
             $pass = "iot@1122";
             $db = "iotdata"; // replace this with your database name from phpMyAdmin
-            $con = mysqli_connect($host,$user,$pass,$db);
-            $sql = "select * from dhtdata order by id desc"; // replace dhtdata with your table name 
-            $result = mysqli_query($con,$sql);
-            while($row = mysqli_fetch_array($result)){
+            $con = mysqli_connect($host, $user, $pass, $db);
+
+            // Check if a date filter is applied
+            $dateFilter = isset($_GET['date']) ? $_GET['date'] : null;
+
+            if ($dateFilter) {
+                // Query to fetch data for the selected date
+                $sql = "SELECT * FROM dhtdata WHERE date = '$dateFilter' ORDER BY id DESC";
+            } else {
+                // Default query to fetch all data
+                $sql = "SELECT * FROM dhtdata ORDER BY id DESC";
+            }
+
+            $result = mysqli_query($con, $sql);
+            while ($row = mysqli_fetch_array($result)) {
                 echo "<tr>";
-                echo "<td>".$row['id']."</td>";
-                echo "<td>".$row['date']."</td>";
-                echo "<td>".$row['time']."</td>";
-                echo "<td>".$row['humidity']."</td>";
-                echo "<td>".$row['temperature']."</td>";
+                echo "<td>" . $row['id'] . "</td>";
+                echo "<td>" . $row['date'] . "</td>";
+                echo "<td>" . $row['time'] . "</td>";
+                echo "<td>" . $row['humidity'] . "</td>";
+                echo "<td>" . $row['temperature'] . "</td>";
                 echo "</tr>";
             }
             ?>
         </table>
     </div>
+
+    <script>
+        function filterData() {
+            const dateInput = document.getElementById('date').value;
+            if (dateInput) {
+                window.location.href = `?date=${dateInput}`;
+            } else {
+                alert('Please enter a date in DD-MM-YYYY format.');
+            }
+        }
+
+        function clearDate() {
+            window.location.href = window.location.pathname; // Reload the page without query parameters
+        }
+    </script>
 </body>
 </html>
