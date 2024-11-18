@@ -5,8 +5,8 @@
 DHT dht(D1,DHT22);
 float hum,temp_c,temp_f;
 
-char* ssid = "BITS-IOT";
-char* pass = "#Jw39%%PQm$";
+char* ssid = "Naganandana";
+char* pass = "";
 
 WiFiClient wifiClient;
 
